@@ -12,9 +12,11 @@ app.use(cors());
 app.use(express.json());
 
 
-app.get('/search/:location', (req, res, next) => {
+app.get('/api/search/:location', (req, res, next) => {
      let options = {       
-      categories: "coffee"
+      categories: "coffee",
+      limit:50,
+      sort_by:'distance'
     };
 
     if(req.params.location.includes("|")){
@@ -32,7 +34,7 @@ app.get('/search/:location', (req, res, next) => {
     });
  });
   
-  app.get('/business/:id', (req, res, next) => {
+  app.get('/api/business/:id', (req, res, next) => {
     client.business(req.params.id).then(response => {
         res.json(response.jsonBody);
       }).catch(e => {
@@ -40,7 +42,7 @@ app.get('/search/:location', (req, res, next) => {
       });
   });
 
-  app.get('/reviews/:id', (req, res, next) => {
+  app.get('/api/reviews/:id', (req, res, next) => {
     client.reviews(req.params.id).then(response => {
         res.json(response.jsonBody);
       }).catch(e => {
@@ -48,7 +50,7 @@ app.get('/search/:location', (req, res, next) => {
       });
   });
 
-  app.get('/location/', (req, res, next) => {
+  app.get('/api/location/', (req, res, next) => {
       let visitorIP = req.connection.remoteAddress;
       let geoObject = geoip.lookup(visitorIP);
       console.log(geoObject);      

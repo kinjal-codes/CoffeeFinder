@@ -12,12 +12,11 @@ export default class SearchResults extends Component {
 
   render() {
     var displayList = this.props.results.map((result) => {
-      return (
-           
+      return (           
         <div className="col-md-4 featured-responsive" key={result.id}>
             <div className="featured-place-wrap">
-                <a href={"/business/" + result.id}>
-                    <img src={result.image_url} className="img-fluid" alt="#"/>
+                <a target="_blank" href={"/business/" + result.id}>
+                    <img src={result.image_url ? result.image_url : "https://s3-media1.fl.yelpcdn.com/bphoto/L1zsACGYyl1BVaFq80f-Jw/o.jpg"} className="img-fluid" alt="#"/>
                     <span className="featured-rating-orange">{result.rating}</span>
                     <div className="featured-title-box">
                         <h6>{result.name}</h6>

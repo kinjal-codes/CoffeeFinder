@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import SearchResults from './SearchResults';
 import TopSearch from './TopSearch';
 import axios from 'axios';
+import {API_DOMAIN} from "../constants";
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.API_URL = 'http://hwsrv-470490.hostwindsdns.com:5000';
+    
     this.onLocationChanged = this.onLocationChanged.bind(this);
     this.loadInitialResults = this.loadInitialResults.bind(this);
     this.state = {results:[]};
@@ -19,8 +20,9 @@ export default class Home extends Component {
     if(lat && long){
       searchLocation = lat + "|" + long;
     }
+    
     console.log(location);
-    axios.get(`${this.API_URL}/search/${searchLocation}`)
+    axios.get(`${API_DOMAIN}/api/search/${searchLocation}`)
     .then(function (response) {
       console.log(response.data.businesses);
       that.setState({

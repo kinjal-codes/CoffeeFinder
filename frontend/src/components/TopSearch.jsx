@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import {API_DOMAIN} from "../constants";
 export default class TopSearch extends Component {
   constructor(props) {
     super(props);
     this.onLocationChanged = this.onLocationChanged.bind(this);
-    this.SubmitLocation = this.SubmitLocation.bind(this);
-    this.API_URL = 'http://hwsrv-470490.hostwindsdns.com:5000';
+    this.SubmitLocation = this.SubmitLocation.bind(this);    
+    
     this.state = {
         location:""
     }
@@ -29,7 +29,7 @@ export default class TopSearch extends Component {
 
   componentDidMount() {
     let that = this;
-    axios.get(`${this.API_URL}/location`)
+    axios.get(`${API_DOMAIN}/api/location`)
     .then(function (response) {
       console.log(response);
       //that.loadInitialResults("",response.data.ll[0],response.data.ll[1]);
